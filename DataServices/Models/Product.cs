@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProductServiceAPI.Models
+namespace DataServices.Models
 {
     public enum InventoryStatus
     {
