@@ -30,9 +30,24 @@ namespace ProductServiceAPI.Controllers
         }
 
         [HttpPost]
-        public async Task Create([FromBody] Product product)
+        public async Task<IActionResult> Create([FromBody] Product product)
         {
             await productService.Create(product);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] Product product)
+        {
+            await productService.Update(product);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await productService.Delete(id);
+            return Ok();
         }
     }
 }
