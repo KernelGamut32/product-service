@@ -35,20 +35,30 @@ namespace DataServices.Repositories
 
         public async Task Update(Product product)
         {
-            var productToEdit = await RetrieveById(product.Id);
-            productToEdit.CatalogNumber = product.CatalogNumber;
-            productToEdit.Description = product.Description;
-            productToEdit.UnitCost = product.UnitCost;
-            productToEdit.QuantityInStock = product.QuantityInStock;
-            productToEdit.InventoryStatus = product.InventoryStatus;
-            await context.SaveChangesAsync();
+            var existingProduct = await RetrieveById(product.Id);
+            if (existingProduct != null)
+            {
+                context.Entry(existingProduct).State = EntityState.Detached;
+                context.Entry(product).State = EntityState.Modified;
+                await context.SaveChangesAsync();
+            }
+            //var productToEdit = await RetrieveById(product.Id);
+            //productToEdit.CatalogNumber = product.CatalogNumber;
+            //productToEdit.Description = product.Description;
+            //productToEdit.UnitCost = product.UnitCost;
+            //productToEdit.QuantityInStock = product.QuantityInStock;
+            //productToEdit.InventoryStatus = product.InventoryStatus;
+            //await context.SaveChangesAsync();
         }
 
         public async Task Delete(int id)
         {
             var productToDelete = await RetrieveById(id);
-            context.Product.Remove(productToDelete);
-            await context.SaveChangesAsync();
+            if (productToDelete != null) 
+            {
+                context.Product.Remove(productToDelete);
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

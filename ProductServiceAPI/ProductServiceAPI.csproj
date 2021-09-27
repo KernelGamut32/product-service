@@ -30,5 +30,11 @@
     <ProjectReference Include="..\DataServices\DataServices.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="products.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
 </Project>

@@ -28,6 +28,17 @@ namespace ProductServiceAPI
             services.AddDbContext<ProductDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("connectionString")));
             services.AddControllers();
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                        builder.AllowAnyMethod();
+                        builder.AllowAnyHeader();
+                    });
+            });
+
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductService, ProductService>();
 
@@ -48,6 +59,8 @@ namespace ProductServiceAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

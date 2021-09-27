@@ -1,5 +1,6 @@
 ﻿using BusinessServices.Interfaces;
 using DataServices.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace ProductServiceAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService productService;
